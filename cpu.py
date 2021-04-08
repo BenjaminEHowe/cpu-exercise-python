@@ -1,4 +1,5 @@
-PROMPT = "Enter instruction: "
+instructions = {}
+accumulator = 0
 
 
 def calc(params):
@@ -19,6 +20,17 @@ def calc(params):
         return op1 / op2
 
 
+instructions['calc'] = calc
+
+def execute():
+    global accumulator
+    with open('statements.txt') as f:
+        for line in f:
+            instruction, params = line.split(' ', 1)
+            assert instruction in instructions
+            accumulator += instructions[instruction](params)
+
+
 if __name__ == '__main__':
-    while True:
-        print(calc(input(PROMPT)))
+    execute()
+    print(accumulator)
