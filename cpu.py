@@ -11,7 +11,7 @@ with open('statements.txt') as f:
 
 
 def calc(params):
-    OPERATORS = ('+', '-', 'x', '/', '^')
+    OPERATORS = ('+', '-', 'x', '/', '^', '%')
     params = params.split(' ')
     assert len(params) == 3
     operator = params[0]
@@ -28,6 +28,8 @@ def calc(params):
         return op1 / op2
     elif operator == '^':
         return op1 ** op2
+    elif operator == '%':
+        return op1 % op2
 
 
 def execute():
