@@ -7,8 +7,8 @@ class TestCPU(unittest.TestCase):
             cpu.execute()
         except SystemExit:
             pass
-        self.assertEqual(cpu.pc, 88)
-        self.assertEqual(cpu.getStatement(cpu.pc), 'goto 3553')
+        self.assertEqual(cpu.pc, 4478)
+        self.assertEqual(cpu.getStatement(cpu.pc), 'goto 7760')
 
 if __name__ == '__main__':
     unittest.main()

@@ -63,8 +63,40 @@ def goto(params):
     pc -= 1 # will be incremented after this instruction executes
 
 
+def remove(params):
+    global pc, statements
+    assert params.isdigit()
+    lineToDelete = int(params) - 1
+    try:
+        del statements[lineToDelete]
+        if lineToDelete < pc:
+            # if we deleted a line prior to the pc, decrement the pc so we don't "jump"
+            pc -= 1
+    except IndexError:
+        pass
+
+
+def replace(params):
+    global statements
+    params = params.split(' ')
+    assert len(params) == 2
+    assert params[0].isdigit()
+    assert params[1].isdigit()
+    position1 = int(params[0]) - 1
+    position2 = int(params[1]) - 1
+    try:
+        statement1 = statements[position1]
+        statement2 = statements[position2]
+        statements[position2] = statement1
+        statements[position1] = statement2
+    except IndexError:
+        pass
+
+
 instructions['calc'] = calc
 instructions['goto'] = goto
+instructions['remove'] = remove
+instructions['replace'] = replace
 
 
 if __name__ == '__main__':
